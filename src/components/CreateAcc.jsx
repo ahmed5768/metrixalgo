@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Images } from "../utils/images";
 import { Eye, EyeOff } from "lucide-react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../firebase";
 import { LABELS } from "../utils/labels";
 
@@ -23,19 +23,33 @@ export const CreateAcc = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // Create Account
         try {
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 formData.userEmail,
                 formData.userPassword
             );
-            console.log("User created:", userCredential.user);
-            alert("Account created successfully!");
+
+            // Email Verification 
+            const user = userCredential.user
+            await sendEmailVerification(user)
+            console.log("User created:", user);
+            alert("Account created! Please check your email to verify your address before logging in.");
+
+
+
         } catch (error) {
             console.error("Error creating account:", error.message);
-            alert("This account already exists");
+
+            if (error.code === "auth/email-already-in-use") {
+                alert("This email is already registered. Try logging in.");
+            } else {
+                alert("Failed to create account. Please try again.");
+            }
         }
-    };
+    }
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
@@ -85,6 +99,7 @@ export const CreateAcc = () => {
                         value={formData.userEmail}
                         required
                         onChange={handleInputChange}
+                        autoComplete="off"
                     />
                     <label
                         htmlFor="email"
@@ -124,7 +139,7 @@ export const CreateAcc = () => {
                 {/* Already have account */}
                 <p className="text-center text-sm text-gray-500 mb-6">
                     Already have an account?{" "}
-                    <Link to={-1} className="text-indigo-600 hover:underline">
+                    <Link to={-1} className="text-blue-600 hover:underline">
                         Login
                     </Link>
                 </p>

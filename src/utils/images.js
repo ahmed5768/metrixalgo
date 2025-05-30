@@ -1,4 +1,4 @@
-import graph from "../assets/images/Graph.png"
+// import graph from "../assets/images/Graph.png"
 export const Images = {
-    graph,
+    graph: 'src/assets/images/Graph.png'
 }
