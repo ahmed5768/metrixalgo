@@ -60,25 +60,25 @@ export const Login = () => {
 
 
     return (
-        <>
-            <form className="flex items-center justify-center content-center gap-2 bg-gray-200 h-screen w-full" onSubmit={handleFormSubmit}>
-                <div className=" bg-white pl-5 pr-5 pt-10 pb-10 w-full m-115 rounded-2xl" >
+        <div className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
+            <form className="bg-white w-full max-w-md rounded-2xl p-6 sm:p-10 shadow-lg"
+                onSubmit={handleFormSubmit}>
 
                     {/* Graph image  */}
-                    <div className="flex item-center justify-center pb-5">
-                        <img src={Images.graph} alt="Graph" />
+                    <div className="flex justify-center mb-6">
+                        <img src={Images.graph} alt="Graph" className="h-12 sm:h-16"/>
                     </div>
 
                     {/* top heading  */}
-                    <h1 className="mb-3 text-center text-2xl">{LABELS.welcomText}</h1>
-                    <p className="mb-12 text-center text-gray-400">{LABELS.logInText}</p>
+                    <h1 className="text-2xl text-center font-semibold mb-2">{LABELS.welcomText}</h1>
+                    <p className="text-center text-sm text-gray-500 mb-8">{LABELS.logInText}</p>
 
                     {/* Email Input  */}
                     <div className="relative mb-5 " data-twe-input-wrapper-init>
                         <input
                             type="email"
                             name="userEmail"
-                            className="peer w-full rounded bg-gray-200 px-3 pt-4 pb-2 text-black placeholder-transparent focus:outline-none focus:ring-1 focus:ring-gray-500"
+                            className="peer w-full rounded bg-gray-100 px-3 pt-4 pb-2 text-black placeholder-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             id="userEmail"
                             placeholder="Enter Email"
                             value={formData.userEmail}
@@ -101,7 +101,7 @@ export const Login = () => {
                         <input
                             type={showPassword ? "text" : "password"}
                             name="userPassword"
-                            className="peer w-full rounded bg-gray-200 px-3 pt-4 pb-2 text-black placeholder-transparent focus:outline-none focus:ring-1 focus:ring-gray-500"
+                            className="peer w-full rounded bg-gray-100 px-3 pt-4 pb-2 text-black placeholder-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             id="userPassword"
                             placeholder="Password"
                             value={formData.userPassword}
@@ -124,10 +124,11 @@ export const Login = () => {
 
                     </div>
 
-                    <p className="mb-7 text-xs text-right text-blue-600 hover:underline">Recover Password</p>
+                    {/* Recover Password */}
+                    <p className="mb-7 text-xs text-right text-blue-600 hover:underline">{LABELS.recover}</p>
 
                     {/* Sign Up Linking  */}
-                    <p className="mb-7 text-center text-gray-400">
+                    <p className="text-center text-sm text-gray-500 mb-6">
                         {LABELS.dontAcc} <Link to="/CreateAcc" className="text-blue-600 hover:underline">Sign Up</Link>
                     </p>
 
@@ -138,9 +139,9 @@ export const Login = () => {
                         </button>
                     </div>
 
-                </div>
+
 
             </form>
-        </>
+        </div>
     )
 }
