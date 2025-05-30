@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/
 import { auth } from "../../firebase";
 import { LABELS } from "../utils/labels";
 
+
 export const CreateAcc = () => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -31,7 +32,7 @@ export const CreateAcc = () => {
                 formData.userPassword
             );
 
-            // Email Verification 
+            // Email Verification
             const user = userCredential.user
             await sendEmailVerification(user)
             console.log("User created:", user);
